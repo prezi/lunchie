@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 # set default values for env vars
-BOT_NAME=l-r
+BOT_NAME=LunchRoulette
 
 HUBOT_HIPCHAT_JID=
 HUBOT_HIPCHAT_PASSWORD=
@@ -18,15 +18,15 @@ SCRIBE_SERVER_PORT=1463
 HTTP_BASIC_AUTH_USER=
 HTTP_BASIC_AUTH_PASSWORD=
 
-PASHA_EMAIL_ADDRESS=
+LunchRoulette_EMAIL_ADDRESS=
 OUTAGE_EMAIL_ADDRESS=
 
 PAGERDUTY_SERVICE_KEYS=
 
 # load env vars from the config file
-if [ -f /etc/prezi/pasha/l-f.cfg ]
+if [ -f /etc/prezi/LunchRoulette/LunchRoulette.cfg ]
 then
-    . /etc/prezi/pasha/l-f.cfg
+    . /etc/prezi/LunchRoulette/LunchRoulette.cfg
 fi
 
 # export env vars
@@ -47,7 +47,7 @@ export SCRIBE_SERVER_PORT
 export HTTP_BASIC_AUTH_USER
 export HTTP_BASIC_AUTH_PASSWORD
 
-export PASHA_EMAIL_ADDRESS
+export LunchRoulette_EMAIL_ADDRESS
 export OUTAGE_EMAIL_ADDRESS
 
 export PAGERDUTY_SERVICE_KEYS
