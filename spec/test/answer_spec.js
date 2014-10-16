@@ -32,24 +32,43 @@ suite('answer.js', function() {
 
   test('date_list', function() {
 
-    var test_store = { Lilo: '14:00',
+    var test_store1 = { Lilo: '14:00',
       Judit: '14:00',
       Matyas: '14:00',
       Eniko: '14:00',
       Ferenc: '14:00',
       Balazs: '14:00' };
 
-    var store_result = { '14:00': [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs' ] };
+    var test_store2 = { Lilo: '14:00',
+      Judit: '12:30',
+      Matyas: '14:00',
+      Eniko: '14:00',
+      Ferenc: '12:30',
+      Balazs: '14:00' };
 
-    var fourteen_reuslt = [ 'Lilo',
+    var store_result1 = { '14:00': [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs' ] };
+
+    var fourteen_result1 = [ 'Lilo',
       'Judit',
       'Matyas',
       'Eniko',
       'Ferenc',
       'Balazs' ];
 
-    assert.equal(6, date_list(test_store)['14:00'].length);
-    assert.equal(true, date_list(test_store)['14:00'].equals(fourteen_reuslt));
+    var store_result2 = { '14:00': [ 'Lilo', 'Matyas', 'Eniko', 'Balazs' ],
+                          '12:30': [ 'Judit', 'Ferenc' ] }; 
+
+    assert.equal(6, date_list(test_store1)['14:00'].length);
+    assert.equal(true, date_list(test_store1)['14:00'].equals(fourteen_result1));
+
+    assert.equal(4, date_list(test_store2)['14:00'].length);
+    assert.equal(2, date_list(test_store2)['12:30'].length);
+    assert.equal(false, date_list(test_store2)['14:00'].equals(fourteen_result1));
+
+    // compare two Objects in JS
+    // http://stackoverflow.com/questions/1068834/object-comparison-in-javascript
+    assert.equal(true, JSON.stringify(store_result2) === JSON.stringify(date_list(test_store2)));
+
 
   });
 
