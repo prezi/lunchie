@@ -1,4 +1,4 @@
 test:
-	@./node_modules/.bin/mocha -u tdd
+	@mocha -u tdd
 
 .PHONY: test

@@ -1,6 +1,7 @@
 var assert = require('assert')
 
 date_list = require('./../../lib/answer').date_list;
+shuffleTimeArray = require('./../../lib/answer').shuffleTimeArray;
 
 // compare two arrays in JavaScript,
 // http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
@@ -40,8 +41,9 @@ suite('answer.js', function() {
       Balazs: '14:00' };
 
     var store_result = { '14:00': [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs' ] };
+    var store_result2 = { '14:00': [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs' ] };
 
-    var fourteen_reuslt = [ 'Lilo',
+    var fourteen_result = [ 'Lilo',
       'Judit',
       'Matyas',
       'Eniko',
@@ -49,10 +51,20 @@ suite('answer.js', function() {
       'Balazs' ];
 
     assert.equal(6, date_list(test_store)['14:00'].length);
-    assert.equal(true, date_list(test_store)['14:00'].equals(fourteen_reuslt));
-
+    assert.equal(true, date_list(test_store)['14:00'].equals(fourteen_result));
+    assert.equal(store_result, shuffleTimeArray(store_result2));
+    
   });
 
+  test('shuffle', function(){
+
+    var name_list = [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs', 'Zoe', 'Alaa', 'Kieu', 'Mohammed', 'Mykola', 'Khaled' ];
+
+    var name_list2 = [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs', 'Zoe', 'Alaa', 'Kieu', 'Mohammed', 'Mykola', 'Khaled' ];
+
+    assert.equal(name_list2, shuffle(name_list));
+
+  });
 
 });
 
