@@ -48,12 +48,12 @@ suite('answer.js', function() {
 
     var store_result1 = { '14:00': [ 'Lilo', 'Judit', 'Matyas', 'Eniko', 'Ferenc', 'Balazs' ] };
 
-    var fourteen_result1 = [ 'Lilo',
-      'Judit',
-      'Matyas',
-      'Eniko',
-      'Ferenc',
-      'Balazs' ];
+    var fourteen_result1 = ['Lilo',
+                            'Judit',
+                            'Matyas',
+                            'Eniko',
+                            'Ferenc',
+                            'Balazs' ];
 
     var store_result2 = { '14:00': [ 'Lilo', 'Matyas', 'Eniko', 'Balazs' ],
                           '12:30': [ 'Judit', 'Ferenc' ] }; 
@@ -68,7 +68,6 @@ suite('answer.js', function() {
     // compare two Objects in JS
     // http://stackoverflow.com/questions/1068834/object-comparison-in-javascript
     assert.equal(true, JSON.stringify(store_result2) === JSON.stringify(date_list(test_store2)));
-
 
   });
 
