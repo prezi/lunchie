@@ -2,6 +2,32 @@ var assert = require('assert')
 
 date_list = require('./../../lib/answer').date_list;
 
+// compare two arrays in JavaScript,
+// http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+}   
+
 suite('answer.js', function() {
 
   test('date_list', function() {
@@ -23,6 +49,7 @@ suite('answer.js', function() {
       'Balazs' ];
 
     assert.equal(6, date_list(test_store)['14:00'].length);
+    assert.equal(true, date_list(test_store)['14:00'].equals(fourteen_reuslt));
 
   });
 
