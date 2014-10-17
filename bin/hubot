@@ -3,7 +3,7 @@
 #set -e
 
 npm install
-#export PATH=
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 export HUBOT_HIPCHAT_ROOMS="${HUBOT_HIPCHAT_ROOMS:-12694_jump@conf.hipchat.com}"
 export HUBOT_HIPCHAT_JOIN_ROOMS_ON_INVITE=false
 
