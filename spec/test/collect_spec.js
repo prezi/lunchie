@@ -30,4 +30,3 @@ suite('collect.js', function() {
 
 });
 
-
