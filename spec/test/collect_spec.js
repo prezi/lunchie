@@ -6,16 +6,14 @@ suite('collect.js', function() {
 
   test('business_logic', function() {
 
-    // TODO 
     // store can only handle unique names -- should provide error if key already exists in hash map /
     // another Gabor has already registered
     // must use "Gabor2" or something as the key
 
-    // TODO
   	// no check to see if employee actually exists. someone could spam random users
   	// assume that no one is malicious
     assert.equal("Data successfully recorded.", business_logic('Lilo;14:00'));
-    // assert.equal("Data successfully recorded.", business_logic('Lilo;12:29')); // TODO: should this work? 
+    // assert.equal("Data successfully recorded.", business_logic('Lilo;12:29')); // should this work? 
     assert.equal("Data successfully recorded.", business_logic('Lilo;12:30')); // edge case
     assert.equal("Data successfully recorded.", business_logic('Lilo;14:59')); // edge case
 
