@@ -21,7 +21,6 @@ module.exports = function(robot) {
 
 		console.log("message is " + msg);
 		console.log("time is " + time);
-		console.log("The latest version is on the server");
 		business_logic(name, time);
 		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".");
 	});
