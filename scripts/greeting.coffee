@@ -5,7 +5,7 @@ module.exports = (robot) ->
     tz = 'America/Los_Angeles'; 
     new cronJob('* * * * * *', writeToConsole, null, true, tz)
     writeToConsole = ->
-    console.log "You will see this every second"
+      console.log "You will see this every second"
 
     user =
       id: "1283794"
@@ -13,4 +13,4 @@ module.exports = (robot) ->
       name: "Alaa Shafaee"
       mention_name: "AlaaShafaee"
     
-    #robot.send user, "Received a greeting from " + msg.message.user.name
+    robot.send user, "Received a greeting from " + msg.message.user.name
