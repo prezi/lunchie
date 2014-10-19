@@ -21,10 +21,12 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
+    "cron": "^1.0.5",
     "hubot": ">= 2.6.0 < 3.0.0",
     "hubot-hipchat": "^2.7.5",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "mocha": "1.21.5"
+    "mocha": "1.21.5",
+    "time": "^0.11.0"
   },
   "engines": {
     "node": ">= 0.8.x",
