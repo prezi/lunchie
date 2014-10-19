@@ -8,6 +8,11 @@ module.exports = (robot) ->
   room = "lunchtest"
   everyTwoMinutes = ->
     robot.messageRoom room, 'Sorry, I will nag you every 2 minutes.'
+  user =
+      id: "1283794"
+      jid: "12694_1283794@chat.hipchat.com"
+      name: "Alaa Shafaee"
+      mention_name: "AlaaShafaee"
 
   sendMessageToUser = ->
-  	robot.send "@AlaaShafaee", "hello"
+  	robot.send user, "hello"
