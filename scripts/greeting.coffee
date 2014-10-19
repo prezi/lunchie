@@ -7,4 +7,4 @@ module.exports = (robot) ->
       name: "Alaa Shafaee"
       mention_name: "AlaaShafaee"
     
-    robot.send user, "Received a greeting"
+    robot.send user, "Received a greeting from " + msg.message.user.name
