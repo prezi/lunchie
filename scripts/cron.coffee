@@ -1,9 +1,10 @@
 module.exports = (robot) ->
+  console.log "the cron job"
   cronJob = require('cron').CronJob
   tz = 'America/Los_Angeles'
   new cronJob('0 */2 * * * *', everyTwoMinutes, null, true, tz)
   new cronJob('0 */1 * * * *', sendMessageToUser, null, true, tz)
-  new cronJob('* * * * * *', sendMessageToUser, null, true, tz)
+  new cronJob('0 */1 * * * *', writeToConsole, null, true, tz)
   
   room = "lunchtest"
   everyTwoMinutes = ->
@@ -20,4 +21,4 @@ module.exports = (robot) ->
     robot.send user, "hello cron job"
 
   writeToConsole = ->
-    console.log "You will see this every second"
+    console.log "You will see this every minute"
