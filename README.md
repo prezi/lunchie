@@ -1,3 +1,126 @@
+# Lunchie
+
+Lunchie is a a version of GitHub's Campfire bot, [hubot][https://hubot.github.com/]. He's pretty cool, so we just changed it a little and deployed it on [Heroku][http://www.heroku.com] so it can connect to [HipChat][https://www.hipchat.com/].
+
+## Setup and Run!
+
+### Setting up Lunchie
+
+We created a `package.json`, so if you `npm install` it, you'll already have:
+
+-[Hubot][https://hubot.github.com/] and the hubot-scripts
+-[Hubot-Hipchat][https://github.com/hipchat/hubot-hipchat], for connecting hubot to the HipChat system
+-[Mocha][http://visionmedia.github.io/mocha/], for testing (we also have some test-files for you)
+
+installed on your computer.
+
+### Running Lunchie locally
+
+You can test your hubot locally by typing `% bin/hubot` in your terminal.
+
+However, if you want to run it on HipChat, you will need a HipChat account for that. After creating your account, check your profile settings. At the *XMPP/Jabber info* part you can see the *Jabber ID* which is *JID* now and you'll also need your password for making it work.
+
+To run your Lunchie locally, we need this in the terminal:
+
+    sudo HUBOT_HIPCHAT_JID="jid_for_hipchat" HUBOT_HIPCHAT_PASSWORD="your_password" bin/hubot --adapter hipchat
+
+or you can just make a local.sh file with
+
+    #!/bin/sh
+
+    export HUBOT_HIPCHAT_JID="jid_for_hipchat"
+    export HUBOT_HIPCHAT_PASSWORD="your_password"
+
+    exec bin/hubot --adapter hipchat
+
+inside and after making it executable (`chmod +x local.sh`), you can just run it with `./local.sh`.
+
+Check HipChat now. Lunchie should be there :)
+
+## Running the deployed Linchie
+
+### Deployment on Heroku
+
+    % heroku create --stack cedar
+    % git push heroku master
+    % heroku ps:scale app=1
+
+If your Heroku account has been verified you can run the following to enable
+and add the Redis to Go addon to your app.
+
+    % heroku addons:add redistogo:nano
+
+If you run into any problems, checkout Heroku's [docs][https://devcenter.heroku.com/articles/getting-started-with-nodejs-o].
+
+You'll need to edit the `Procfile` to set the name of your hubot.
+
+More detailed documentation can be found on the
+[deploying hubot onto Heroku][https://github.com/github/hubot/blob/master/docs/deploying/heroku.md] wiki page.
+
+In Heroku, you have to set the Config Variables: you just need to add the same info you did when you were running it locally:
+
+-HUBOT_HIPCHAT_JID      jid_for_hipchat
+-HUBOT_HIPCHAT_PASSWORD your_password
+
+After assigning at least 1 dyno to this task, your Lunchie should be up and running in HipChat, always!
+
+## In case, you want to improve or change it...
+
+### Scripting
+
+Take a look at the scripts in the `./scripts` folder for examples.
+Delete any scripts you think are useless or boring.  Add whatever functionality you
+want hubot to have. Read up on what you can do with hubot in the [Scripting Guide][https://github.com/github/hubot/blob/master/docs/scripting.md].
+
+## Adapters
+
+Adapters are the interface to the service you want your hubot to run on. This
+can be something like Campfire or IRC. There are a number of third party
+adapters that the community have contributed. Check
+[Hubot Adapters][https://github.com/github/hubot/blob/master/docs/adapters.md] for the available ones.
+
+If you would like to run a non-Campfire or shell adapter you will need to add
+the adapter package as a dependency to the `package.json` file in the
+`dependencies` section.
+
+Once you've added the dependency and run `npm install` to install it you can
+then run hubot with the adapter.
+
+    % bin/hubot -a <adapter>
+
+Where `<adapter>` is the name of your adapter without the `hubot-` prefix.
+
+## hubot-scripts
+
+There will inevitably be functionality that everyone will want. Instead
+of adding it to hubot itself, you can submit pull requests to
+[hubot-scripts][https://github.com/github/hubot-scripts].
+
+To enable scripts from the hubot-scripts package, add the script name with
+extension as a double quoted string to the `hubot-scripts.json` file in this
+repo.
+
+## external-scripts
+
+Tired of waiting for your script to be merged into `hubot-scripts`? Want to
+maintain the repository and package yourself? Then this added functionality
+maybe for you!
+
+Hubot is now able to load scripts from third-party `npm` packages! To enable
+this functionality you can follow the following steps.
+
+1. Add the packages as dependencies into your `package.json`
+2. `npm install` to make sure those packages are installed
+
+To enable third-party scripts that you've added you will need to add the package
+name as a double quoted string to the `external-scripts.json` file in this repo.
+
+## Restart the bot
+
+You may want to get comfortable with `heroku logs` and `heroku restart`
+if you're having issues.
+
+<!-- 
 # Hubot
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
@@ -155,3 +278,4 @@ Add the subdomain hubot should connect to. If you web URL looks like
 
 You may want to get comfortable with `heroku logs` and `heroku restart`
 if you're having issues.
+ -->
