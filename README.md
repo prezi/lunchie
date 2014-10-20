@@ -8,9 +8,9 @@ Lunchie is a a version of GitHub's Campfire bot, [hubot](https://hubot.github.co
 
 We created a `package.json`, so if you `npm install` it, you'll already have:
 
--[Hubot](https://hubot.github.com/) and the hubot-scripts
--[Hubot-Hipchat](https://github.com/hipchat/hubot-hipchat), for connecting hubot to the HipChat system
--[Mocha](http://visionmedia.github.io/mocha/), for testing (we also have some test-files for you)
+    -[Hubot](https://hubot.github.com/) and the hubot-scripts
+    -[Hubot-Hipchat](https://github.com/hipchat/hubot-hipchat), for connecting hubot to the HipChat system
+    -[Mocha](http://visionmedia.github.io/mocha/), for testing (we also have some test-files for you)
 
 installed on your computer.
 
@@ -59,8 +59,8 @@ More detailed documentation can be found on the
 
 In Heroku, you have to set the Config Variables: you just need to add the same info you did when you were running it locally:
 
--HUBOT_HIPCHAT_JID      jid_for_hipchat
--HUBOT_HIPCHAT_PASSWORD your_password
+    -HUBOT_HIPCHAT_JID      jid_for_hipchat
+    -HUBOT_HIPCHAT_PASSWORD your_password
 
 After assigning at least 1 dyno to this task, your Lunchie should be up and running in HipChat, always!
 
