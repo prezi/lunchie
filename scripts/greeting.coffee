@@ -16,19 +16,13 @@ module.exports = (robot) ->
     robot.send user, "Received a greeting from " + msg.message.user.name
 
     user =
-      id: "1283794"
-      #name: "Alaa Shafaee"
+      jid: "12694_1283794@chat.hipchat.com"
       mention_name: "AlaaShafaee"
-
-    robot.send user, "Received 2" + msg.message.user.name
-
-     user =
-      id: "1283794"
+    
+    robot.send user, "worked with jid " + msg.message.user.name
+    
+    user =
+      name: "Alaa Shafaee"
       mention_name: "AlaaShafaee"
-
-    robot.send user, "Received 3" + msg.message.user.name
-
-     user =
-      mention_name: "AlaaShafaee"
-
-    robot.send user, "Received 4" + msg.message.user.name
+    
+    robot.send user, "worked with name and mention name"
