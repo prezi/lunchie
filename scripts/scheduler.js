@@ -20,12 +20,12 @@ module.exports = function(robot) {
    */
   var cron = require('cron');
   //Cron job that fires at the first, 15th, 30th and 45th minute of every hour.
-  var cronJob = cron.job("0 0,15,30,45 * * * *", function() {
+  var cronJob = cron.job("0 */1 * * * *", function() {
     console.log("cron job that fires every hour at x:00, x:15, x:30 and x:45");
     //Gets the current time.
     var lunch_date = new Date();
     //Sets lunch_date to be 15 minutes from now.
-    lunch_date.setMinutes(lunch_date.getMinutes() + 15);
+    lunch_date.setMinutes(lunch_date.getMinutes() + 1);
     var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
     console.log("lunch time is " + lunch_time);
     //Informs users about their lunchmates 15 minutes before lunch.
