@@ -25,8 +25,8 @@ module.exports = function(robot) {
 		console.log("message is " + msg);
 		console.log("time is " + time);
 		business_logic(mention_name, time, jid);
-		console.log("store is: " + store)
-		console.log("jid_store is: " + jid_store)
+		console.log("store is: " + JSON.stringify(store));
+		console.log("jid_store is: " + JSON.stringify(jid_store));
 		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".");
 	});
 }
