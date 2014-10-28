@@ -26,7 +26,11 @@ module.exports = function(robot) {
     var lunch_date = new Date();
     //Sets lunch_date to be 15 minutes from now.
     lunch_date.setMinutes(lunch_date.getMinutes() + 1);
-    var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
+    if ((lunch_date.getMinutes()).length == 1 ) {
+      var lunch_time = lunch_date.getHours() + ":0" + lunch_date.getMinutes();
+    } else {
+      var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
+    }
     console.log("lunch time is " + lunch_time);
     //Informs users about their lunchmates 15 minutes before lunch.
     notify_lunch_partners(robot, lunch_time);
@@ -42,47 +46,29 @@ function notify_lunch_partners(robot, lunch_time) {
   //gi is the group index, not the group.
   for(var gi in groups) {
     var group = groups[gi];
-    console.log("1");
-    console.log(group);
+    
     //Notifies users that were not assigned lunchmates.
     if(group.length == 1) {
-      console.log("2");
-      //'user' should also have a jid.
-      //'mention_name' is the mention_name of HipChat.
+      
       var user = group[0];
-      var envelope = {user: user, room: user.jid};
-      console.log("user: " + JSON.stringify(user));
-      console.log("3");
+      
       var response_text = "Hey " + get_mention_name(group[0]) + ", unfortunately, nobody signed up for lunch at " + 
       lunch_time + ". Enjoy your meal!";
-      console.log("4");
 
-      robot.send(envelope, response_text);
-      // robot.messageRoom("12694_lunchie_test@conf.hipchat.com", "message");
-      // robot.messageRoom(group.jid[0], "message");
+      robot.messageRoom(group[0].jid[0], response_text);
       
-      console.log("5");
-      console.log(response_text);
     } else {
       var response_text = "Enjoy your meal at " + lunch_time + ". Your lunch partners are:\n" + 
       group.map(get_mention_name).join('\n') + "\n";
-      console.log("6");
+
       //'ui' contains the user index in the array of users, not the user object.
       for(var ui in group) {
-        console.log("7");
+
         //'user' should also have a jid.
         var user = group[ui];
-        console.log("8");
-
-
-        // robot.messageRoom("12694_lunchie_test@conf.hipchat.com", "message");
-        robot.messageRoom("12694_1283811@chat.hipchat.com", "message");
 
         //Removes the user name from the list of lunchmates and notifies the user.
-        // robot.send(user, "Hey " + get_mention_name(user) + ", "+ response_text.replace(get_mention_name(user) 
-        //     + "\n", ""));
-        
-        console.log("9");
+        robot.messageRoom(group[ui].jid[0], "Hey " + get_mention_name(group[ui]) + ", "+ response_text.replace(get_mention_name(group[ui]) + "\n", ""));
       }
     }
   }
