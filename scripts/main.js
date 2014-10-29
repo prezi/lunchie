@@ -11,7 +11,7 @@
 //   hubot 13:00
 
 
-business_logic = require('./../lib/collect').business_logic;
+collect = require('./../lib/collect').collect;
 store = require('./../lib/collect').store;
 jid_store = require('./../lib/collect').jid_store;
 var timeFormat = /([0-9]{2})\:([0-9]{2})/;
@@ -24,7 +24,7 @@ module.exports = function(robot) {
 
 		console.log("message is " + msg);
 		console.log("time is " + time);
-		business_logic(mention_name, time, jid);
+		collect(mention_name, time, jid);
 		console.log("store is: " + JSON.stringify(store));
 		console.log("jid_store is: " + JSON.stringify(jid_store));
 		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".");
