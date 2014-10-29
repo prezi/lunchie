@@ -24,9 +24,11 @@ module.exports = function(robot) {
     // console.log("cron job that fires every hour at x:00, x:15, x:30 and x:45");
     //Gets the current time.
     var lunch_date = new Date();
+    // console.log("lunch date minutes: " + lunch_date.getMinutes());
+    // console.log("lunch date minutes length: " + (lunch_date.getMinutes()).length);
     //Sets lunch_date to be 15 minutes from now.
-    lunch_date.setMinutes(lunch_date.getMinutes() + 1);
-    if ((lunch_date.getMinutes()).length == 1 ) {
+    lunch_date.setMinutes(lunch_date.getMinutes() + 15);
+    if ((lunch_date.getMinutes()) < 10 ) {
       var lunch_time = lunch_date.getHours() + ":0" + lunch_date.getMinutes();
     } else {
       var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
