@@ -17,7 +17,7 @@ jid_store = require('./../lib/collect').jid_store;
 var timeFormat = /([0-9]{2})\:([0-9]{2})/;
 
 module.exports = function(robot) {
-	robot.respond(/(1[0-4]{1})\:([0-5]{1}[0-9]{1})/i, function(msg) {
+	robot.respond(/([0-9]{2})\:([0-9]{2})/i, function(msg) {
 		var mention_name = msg.message.user.mention_name;
 		var time = msg.match[1] + ":" + msg.match[2];
 		var jid = msg.message.user.jid;
