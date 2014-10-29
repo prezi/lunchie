@@ -4,7 +4,7 @@
 cancelLunch = require('./../lib/cancellunch').cancelLunch;
 
 module.exports = function(robot) {
-  robot.respond(/cancel|Cancel|CANCEL/i, function(msg) {
+  robot.respond(/cancel/i, function(msg) {
   var mention_name = msg.message.user.mention_name;
 
   cancelLunch(mention_name);
