@@ -27,12 +27,15 @@ module.exports = function(robot) {
     // console.log("lunch date minutes: " + lunch_date.getMinutes());
     // console.log("lunch date minutes length: " + (lunch_date.getMinutes()).length);
     //Sets lunch_date to be 15 minutes from now.
+    console.log("date: " + lunch_date);
+
     lunch_date.setMinutes(lunch_date.getMinutes() + 15);
     if ((lunch_date.getMinutes()) < 10 ) {
       var lunch_time = lunch_date.getHours() + ":0" + lunch_date.getMinutes();
     } else {
       var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
     }
+
     console.log("lunch time is " + lunch_time);
     //Informs users about their lunchmates 15 minutes before lunch.
     notify_lunch_partners(robot, lunch_time);
