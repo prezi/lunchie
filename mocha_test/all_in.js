@@ -80,11 +80,11 @@ function collect(name, msg, jid) {
             } else {
                 var time = '{0}:{1}'.format(hours.toString(), "0"+ minutes.toString());
             }
-            store[name] = [time];
-            jid_store[name] = [jid];
+            // store[name] = [time];
+            // jid_store[name] = [jid];
 
-            // store[name] = time;
-            // jid_store[name] = jid;
+            store[name] = time;
+            jid_store[name] = jid;
         }
     }
 }
@@ -120,10 +120,12 @@ function dateList(store){
 }
 
 function generateGroups(timeslot, time_array, maxSize) {
-    var array = Array.prototype.slice.apply(time_array);
+    // var array = Array.prototype.slice.apply(time_array);
+    var array = time_array;
     if (array.length == 0) return [];
     var chunkSize = array.length / Math.ceil(array.length / maxSize);
-    var result = [array.slice(0,chunkSize)].concat(generateGroups(timeslot, array.slice(chunkSize), maxSize));
+    var result0 = array.slice(0,chunkSize);
+    var result = result0.concat(generateGroups(timeslot, array.slice(chunkSize), maxSize));
     return result;
 }
 

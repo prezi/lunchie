@@ -14,6 +14,16 @@ lunchGroups = require('../all_in.js').lunchGroups;
 collect('Zoe', '13:00', '12694_1283811@chat.hipchat.com');
 collect('Kieu', '14:00', '12694_1283812@chat.hipchat.com');
 collect('Alaa', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa0', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa1', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa2', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa3', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa4', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa5', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa6', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa7', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa8', '13:00', '12694_1283813@chat.hipchat.com');
+collect('Alaa9', '13:00', '12694_1283813@chat.hipchat.com');
 
 suite('collect', function() {
   test('get the time from store', function() {
@@ -37,21 +47,17 @@ suite('dateList', function() {
 });
 
 suite('generateGroups', function() {
-  test('collect', function() {
-    assert.equal();
-    // assert.equal("Data successfully recorded.", collect("Lilo", "14:00"));
-    // // assert.equal("Data successfully recorded.", collect('Lilo;12:29')); // should this work? 
-    // assert.equal("Data successfully recorded.", collect("Lilo", "12:30")); // edge case
-    // assert.equal("Data successfully recorded.", collect("Lilo", "14:59")); // edge case
+  // generateGroups('14:00',dateList(store),4);
 
-    // assert.equal("Data successfully recorded.", collect("Lilo", "14:00"));
-    // assert.equal("Data successfully recorded.", collect("Matyas", "14:20"));
-    // assert.equal("Data successfully recorded.", collect("!!!", "14:20"));
-    // assert.equal(undefined, collect("Lilo", "15:00"));
-    // assert.equal(undefined, collect("Lilo", "12:00"));
-    // assert.equal(undefined, collect("Matyas", "140:00"));
-    // assert.equal(undefined, collect("Matyas", "14:2980"));
-    // assert.equal(undefined, collect("Matyas", "140:2980"));
+  test('groups by time', function() {
+    assert.equal('Kieu', generateGroups('14:00',dateList(store)['14:00'],4));
+    // assert.equal(["Zoe","Alaa"], generateGroups('13:00',dateList(store)['13:00'],4));
+    assert.equal('Zoe', generateGroups('13:00',dateList(store)['13:00'][0],4));
+    assert.equal('Alaa', generateGroups('13:00',dateList(store)['13:00'][1],4));
+
+  });
+  test('number of generated groups', function() {
+    assert.equal(1, (generateGroups('14:00',dateList(store),4).length));
   });
 });
 
