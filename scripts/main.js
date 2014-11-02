@@ -28,9 +28,11 @@ module.exports = function(robot) {
 			new_value = value.push({mention_name: mention_name, jid: jid});
 			console.log(new_value);
 			robot.brain.set("time", new_value);
+			robot.brain.emit("save");
 		} else {
 			robot.brain.set(time, [{mention_name: mention_name, jid: jid}])
 			console.log("else");
+			robot.brain.emit("save");
 		}
 
 		// [mention_name, jid].push;
@@ -41,6 +43,6 @@ module.exports = function(robot) {
 		console.log("Brain key: " + JSON.stringify(robot.brain.data["_private"]));
 		// console.log("Brain: " + JSON.stringify(robot.brain.get("time")));
 
-		robot.brain.emit("save");
+		// robot.brain.emit("save");
 	});
 }
