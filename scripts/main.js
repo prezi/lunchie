@@ -40,5 +40,7 @@ module.exports = function(robot) {
 		// console.log("Brain: " + robot.brain.get("time")[1]);
 		console.log("Brain key: " + JSON.stringify(robot.brain.data["_private"]));
 		// console.log("Brain: " + JSON.stringify(robot.brain.get("time")));
+
+		robot.brain.emit("save");
 	});
 }
