@@ -22,24 +22,7 @@ module.exports = function(robot) {
 		var time = msg.match[1] + ":" + msg.match[2];
 		var jid = msg.message.user.jid;
 
-		if ( time in robot.brain.data["_private"] ) {
-			value = robot.brain.get(time);
-			new_value = value.push({mention_name: mention_name, jid: jid});
-			console.log("if");
-			robot.brain.set("time", new_value);
-		} else {
-			robot.brain.set(time, [{mention_name: mention_name, jid: jid}])
-			console.log("else");
-		}
 		collect(mention_name, time, jid);
-
-		// [mention_name, jid].push;
 		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".")
-		// robot.brain.set(time, );
-		// robot.brain.set("time", {mention_name: mention_name, jid: jid});
-		// console.log("Brain: " + robot.brain.get("time")[1]);
-		console.log("Brain key: " + JSON.stringify(robot.brain.data["_private"]));
-		// console.log("Brain: " + JSON.stringify(robot.brain.get("time")));
-
 	});
 }

@@ -25,6 +25,7 @@
     "hubot": ">= 2.6.0 < 3.0.0",
     "hubot-hipchat": "^2.7.5",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
+    "jsonfile": "^2.0.0",
     "mocha": "1.21.5",
     "time": "^0.11.0"
   },
