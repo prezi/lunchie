@@ -13,7 +13,10 @@
 
 var store = {};
 var jid_store = {};
-var lunchGroups = {};
+var lunch_groups = {'12:30': [], '12:45': [], '13:00': [], '13:15': [],
+                    '13:30': [], '13:45': [], '14:00': [], '14:15': [], 
+                    '14:30': [], '14:45': [], '15:00': [], };
+var users = {};
 
 var timeFormat = /([0-9]{2})\:([0-9]{2})/;
 
@@ -85,6 +88,14 @@ function collect(name, msg, jid) {
 
             store[name] = time;
             jid_store[name] = jid;
+
+            users[name] = [time, jid];
+        }
+        for (time in lunch_groups) {
+            for (name in users) {
+                if users[name][1] = 
+            }
+            lunch_groups[time].push
         }
     }
 }
@@ -116,6 +127,7 @@ function dateList(store){
             ret[timeval]=[key];
         }
     }
+    console.log(ret);
     return ret;
 }
 
