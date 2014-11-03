@@ -24,16 +24,14 @@ module.exports = function(robot) {
 
 		if ( time in robot.brain.data["_private"] ) {
 			value = robot.brain.get(time);
-			console.log(value);
 			new_value = value.push({mention_name: mention_name, jid: jid});
-			console.log(new_value);
+			console.log("if");
 			robot.brain.set("time", new_value);
-			robot.brain.emit("save");
 		} else {
 			robot.brain.set(time, [{mention_name: mention_name, jid: jid}])
 			console.log("else");
-			robot.brain.emit("save");
 		}
+		collect(mention_name, time, jid);
 
 		// [mention_name, jid].push;
 		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".")
@@ -43,6 +41,5 @@ module.exports = function(robot) {
 		console.log("Brain key: " + JSON.stringify(robot.brain.data["_private"]));
 		// console.log("Brain: " + JSON.stringify(robot.brain.get("time")));
 
-		// robot.brain.emit("save");
 	});
 }
