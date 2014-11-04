@@ -9,7 +9,8 @@
 //   cron, notify_lunch_partners
 
 generateGroups = require('./../lib/answer').generateGroups;
-var lunch_groups = require('../data.json');
+var lunch_groups = require(__dirname + '/data.json');
+
 var MAXSIZE = 4;
 
 module.exports = function(robot) {
@@ -25,27 +26,36 @@ module.exports = function(robot) {
     } else {
       var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
     }
-
     console.log("lunch time is " + lunch_time);
-    notify_lunch_partners(robot, lunch_time);
+    // notify_lunch_partners(robot, lunch_time);
+    notify_lunch_partners(robot, "13:52");
   }); 
   cronJob.start();
 }
 function notify_lunch_partners(robot, lunch_time) {
   // var groups = getLunchPartners(lunch_time);
   var groups = generateGroups(lunch_time, lunch_groups, MAXSIZE);
+  console.log('lunch_groups: ' + JSON.stringify(lunch_groups));
+  // console.log('groups: ' + JSON.stringify(groups));
+  // robot.messageRoom("12694_1283811@chat.hipchat.com", "Hello");
   for(var gi in groups) {
+    console.log('groups[gi]: ' + groups[gi]);
     var group = groups[gi];
+    // console.log('group: ' + group);
+    // console.log('group[0]: ' + group[0]);
+    // console.log('mention_name: ' + group[0][0]);
+    // console.log('jid: ' + group[0][1]);
+    robot.messageRoom("12694_1283811@chat.hipchat.com", "Hello");
     if(group.length == 1) {
-      var response_text = "Hey " + get_mention_name(group[0]) + ", unfortunately, nobody signed up for lunch at " + 
+      var response_text = "Hey " + '@'+group[0][0] + ", unfortunately, nobody signed up for lunch at " + 
       lunch_time + ". Enjoy your meal!";
-      robot.messageRoom(group[1], response_text);      
+      robot.messageRoom(group[0][1], response_text);
     } else {
       var response_text = "Enjoy your meal at " + lunch_time + ". Your lunch partners are:\n" + 
-      group.map('@'+group[0]).join('\n') + "\n";
+      group[0].map('@'+group[0][1]).join('\n') + "\n";
       for(var ui in group) {
         var user = group[ui];
-        robot.messageRoom(group[ui].jid[0], "Hey " + '@'+group[ui] + ", "+ response_text.replace('@'+group[ui]) + "\n", "");
+        robot.messageRoom(group[ui][1], "Hey " + '@'+group[ui][0] + ", "+ response_text.replace('@'+group[ui][0]) + "\n", "");
       }
     }
   }
