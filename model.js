@@ -30,7 +30,7 @@ var User = sequelize.define('User', {
 })
 
   sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .complete(function(err) {
      if (!!err) {
        console.log('An error occurred while creating the table:', err)
@@ -38,3 +38,7 @@ var User = sequelize.define('User', {
        console.log('It worked!')
      }
   })
+
+// export connection
+module.exports.sequelize = sequelize;
+module.exports.User = User;
