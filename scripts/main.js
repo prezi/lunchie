@@ -12,7 +12,6 @@
 
 
 collect = require('./../lib/collect').collect;
-var timeFormat = /([0-9]{2})\:([0-9]{2})/;
 
 module.exports = function(robot) {
 	robot.respond(/([0-9]{2})\:([0-9]{2})/i, function(msg) {
@@ -22,6 +21,6 @@ module.exports = function(robot) {
 
 		// collect('Zoe', '13:00', '12694_1283811@chat.hipchat.com');
 		collect(mention_name, time, jid);
-		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".")
-	});
+		msg.reply("Okay, " + msg.message.user.name + "! I will sign you up for " + time + ".");
+	})
 }
