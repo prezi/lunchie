@@ -9,7 +9,6 @@
 //   cron, notify_lunch_partners
 
 generateGroups = require('./../lib/answer').generateGroups;
-var lunch_groups = require(__dirname + '/data.json');
 
 var MAXSIZE = 4;
 
@@ -32,10 +31,10 @@ module.exports = function(robot) {
   }); 
   cronJob.start();
 }
+
 function notify_lunch_partners(robot, lunch_time) {
   // var groups = getLunchPartners(lunch_time);
-  var groups = generateGroups(lunch_time, lunch_groups, MAXSIZE);
-  console.log('lunch_groups: ' + JSON.stringify(lunch_groups));
+  var groups = generateGroups(lunch_time, MAXSIZE);
   // console.log('groups: ' + JSON.stringify(groups));
   // robot.messageRoom("12694_1283811@chat.hipchat.com", "Hello");
   for(var gi in groups) {
