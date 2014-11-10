@@ -9,6 +9,7 @@
 //   cron, notify_lunch_partners
 
 generateGroups = require('./../lib/answer').generateGroups;
+retrieveGroups = require('./../lib/answer').retrieveGroups;
 
 var MAXSIZE = 4;
 

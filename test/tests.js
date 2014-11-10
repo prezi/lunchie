@@ -29,6 +29,7 @@ describe("Lunchie", function() {
             require("../scripts/hello.js")(robot);
             require("../scripts/main.js")(robot);
             require("../scripts/scheduler.js")(robot);
+            require("../scripts/cancel.js")(robot);
 
             // create a user
             user = robot.brain.userForId("1", {
@@ -60,7 +61,6 @@ describe("Lunchie", function() {
     });
 
     it("adds user to database on normal input", function(done) {
-        // here's where the magic happens!
         adapter.on("reply", function(envelope, strings) {
             User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 assert.isNotNull(usr, "Adding user to db was not successfull");        
@@ -72,8 +72,7 @@ describe("Lunchie", function() {
 
     });
 
-    it.skip("rounds time correctly", function(done) {
-        // here's where the magic happens!
+    it("rounds time", function(done) {
         adapter.on("reply", function(envelope, strings) {
             User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 assert.equal(usr.rounded_time,'12:30', "Nope, it doesn't round time correctly");        
@@ -104,6 +103,71 @@ describe("Lunchie", function() {
         adapter.receive(new TextMessage(user, "@lunchie 15:59"));
         adapter.receive(new TextMessage(user, "@lunchie 12:29"));
         adapter.receive(new TextMessage(user, "@lunchie 13:60"));
+
+    });
+
+    //Timeouts are specified because we need some time before data in database will be updated.
+    it("handles multiple messages from the same user", function(done) {
+        var numOfCases = 4;
+        var curCase = 0;
+        this.timeout(15000);
+        adapter.on("reply", function(envelope, strings) {
+            if (++curCase == numOfCases)
+                setTimeout(function(){User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                    assert.equal(usr.request_time,'13:35', "Nope, it doesn't handle multiple messages correctly"); 
+                    done();        
+                })}, 500);
+        });
+
+        adapter.receive(new TextMessage(user, "@lunchie 12:39"));
+        adapter.receive(new TextMessage(user, "@lunchie 14:39"));
+        adapter.receive(new TextMessage(user, "@lunchie 12:35"));
+        setTimeout(function(){adapter.receive(new TextMessage(user, "@lunchie 13:35"))}, 500);
+        //timeout is guaranty that this message will be processed last by db
+    });
+
+    //Timeouts are specified because we need some time before data in database will be updated.
+    it("handles same multiple messages from the same user and not doubling user in database", function(done) {
+        var numOfCases = 4;
+        var curCase = 0;
+        adapter.on("reply", function(envelope, strings) {
+            if (++curCase == numOfCases)
+                setTimeout(function(){User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(result) {
+                    assert.equal(result.count, 1, "Nope, It doubles user info in database");
+                    done(); 
+                })}, 500);
+        });
+
+        adapter.receive(new TextMessage(user, "@lunchie 12:35"));
+        adapter.receive(new TextMessage(user, "@lunchie 12:35"));
+        adapter.receive(new TextMessage(user, "@lunchie 12:35"));
+        adapter.receive(new TextMessage(user, "@lunchie 12:35"));
+
+    });
+
+    it("canceles previous time", function(done) {
+        adapter.on("reply", function(envelope, strings) {
+            User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                assert.isUndefined(usr.request_time);
+                assert.isUndefined(usr.rounded_time);
+                assert.match(strings[0], (/I will cancel your lunch request./));
+                setTimeout(done, 500); 
+            });
+        });
+
+        adapter.receive(new TextMessage(user, "@lunchie cancel"));
+
+    });
+
+    it("cancel a time that was not entered before", function(done) {
+        adapter.on("reply", function(envelope, strings) {
+            User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                assert.match(strings[0], (/You tried to trick me. Before canceling lunch request try to request it/));
+                done(); 
+            });
+        });
+
+        adapter.receive(new TextMessage(user, "@lunchie cancel"));
 
     });
 
