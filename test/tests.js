@@ -72,12 +72,15 @@ describe("Lunchie", function() {
 
     });
 
+     //Timeout is specified because we need some time before data in database will be updated.
     it("rounds time", function(done) {
         adapter.on("reply", function(envelope, strings) {
-            User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+            setTimeout(function(){
+                User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                console.log(usr);
                 assert.equal(usr.rounded_time,'12:30', "Nope, it doesn't round time correctly");        
                 done();
-            });
+            })}, 500);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 12:39"));
@@ -110,7 +113,7 @@ describe("Lunchie", function() {
     it("handles multiple messages from the same user", function(done) {
         var numOfCases = 4;
         var curCase = 0;
-        this.timeout(15000);
+        this.timeout(10000);
         adapter.on("reply", function(envelope, strings) {
             if (++curCase == numOfCases)
                 setTimeout(function(){User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
