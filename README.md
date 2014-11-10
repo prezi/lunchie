@@ -37,7 +37,7 @@ inside and after making it executable (`chmod +x local.sh`), you can just run it
 
 Check HipChat now. Lunchie should be there :)
 
-## Running the deployed Linchie
+## Running the deployed Lunchie
 
 ### Deployment on Heroku
 
