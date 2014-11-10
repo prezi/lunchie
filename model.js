@@ -4,7 +4,7 @@ var Sequelize = require('sequelize');
 //     dialect: 'postgres'
 // })
 
-var sequelize = new Sequelize('lunchie', 'kieutran', 'hello', {
+var sequelize = new Sequelize('table', 'user', 'password', {
   // gimme postgres, please!
   dialect: 'postgres'
 })
