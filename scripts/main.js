@@ -13,12 +13,27 @@
 
 collect = require('./../lib/collect').collect;
 
+
+function isCorrectTimeForLunch(hours , minutes){
+	if(Number(minutes) >= 60) {
+		return false;
+	}
+	// convert time to minutes and compare them 
+	var minTimeForLaunch = 12 * 60 + 30 ;
+	var maxTimeForLanuch = 14 * 60 + 59 ;
+	var requestedTimeForLanuch = Number(hours) * 60 + Number(minutes);
+	if(requestedTimeForLanuch >= minTimeForLaunch && requestedTimeForLanuch <= maxTimeForLanuch) {
+		return true;
+	}
+	return false;
+}
+
 module.exports = function(robot) {
 	robot.respond(/([0-9]{2})\:([0-9]{2})/i, function(msg) {
-		var mention_name = msg.message.user.mention_name;
-		var time = msg.match[1] + ":" + msg.match[2];
-		var jid = msg.message.user.jid;
-		if ((msg.match[1] <= 14 && msg.match[1] >= 13 && msg.match[2] < 60 && msg.match[2] >= 0) || (msg.match[1] == 12 && msg.match[2] >=30 && msg.match[2] < 60)) {
+		if(isCorrectTimeForLunch(msg.match[1],msg.match[2]) === true){
+			var mention_name = msg.message.user.mention_name;
+			var time = msg.match[1] + ":" + msg.match[2];
+			var jid = msg.message.user.jid;
 			collect(mention_name, time, jid);
 			msg.reply("Okay, "	 + msg.message.user.name + "! I will sign you up for " + time + ".");
 		} else {
