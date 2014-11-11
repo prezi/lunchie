@@ -12,6 +12,7 @@
 
 
 collect = require('./../lib/collect').collect;
+var usrMsgs = require('../MessagesEN');
 
 
 function isCorrectTimeForLunch(hours , minutes){
@@ -35,9 +36,9 @@ module.exports = function(robot) {
 			var time = msg.match[1] + ":" + msg.match[2];
 			var jid = msg.message.user.jid;
 			collect(mention_name, time, jid);
-			msg.reply("Okay, "	 + msg.message.user.name + "! I will sign you up for " + time + ".");
+			msg.reply(usrMsgs.confirmUserSignUpChoice.format(msg.message.user.name,time));
 		} else {
-			msg.reply(msg.message.user.name + ", Your time interval is not correct. Please input a preferred lunch time between 12:30 and 14:59.");
+			msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name));
 		}
 	})
 }
