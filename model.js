@@ -1,12 +1,12 @@
 var Sequelize = require('sequelize');
+var appConfig = require('./AppConfig');
 
 // var sequelize = new Sequelize('postgres://kieutran@localhost/demodb1', {
 //     dialect: 'postgres'
 // })
 
-var sequelize = new Sequelize('table', 'user', 'password', {
-  // gimme postgres, please!
-  dialect: 'postgres'
+var sequelize = new Sequelize(appConfig.dbName, appConfig.dbUserName, appConfig.dbPassword, {
+  dialect: appConfig.dbDialect
 })
 
 sequelize
