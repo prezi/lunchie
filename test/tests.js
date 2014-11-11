@@ -78,12 +78,12 @@ describe("Lunchie", function() {
             setTimeout(function(){
                 User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 console.log(usr);
-                assert.equal(usr.rounded_time,'12:30', "Nope, it doesn't round time correctly");        
+                assert.equal(usr.rounded_time,'13:00', "Nope, it doesn't round time correctly");        
                 done();
             })}, 500);
         });
 
-        adapter.receive(new TextMessage(user, "@lunchie 12:39"));
+        adapter.receive(new TextMessage(user, "@lunchie 12:55"));
 
     });
 
