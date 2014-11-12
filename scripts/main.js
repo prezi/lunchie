@@ -30,7 +30,7 @@ function isCorrectTimeForLunch(hours , minutes){
 }
 
 module.exports = function(robot) {
-	robot.respond(/([0-9]{2})\:([0-9]{2})/i, function(msg) {
+	robot.respond(/\b([0-9]{2})\:([0-9]{2})\b/i, function(msg) {
 		if(isCorrectTimeForLunch(msg.match[1],msg.match[2]) === true){
 			var mention_name = msg.message.user.mention_name;
 			var time = msg.match[1] + ":" + msg.match[2];
