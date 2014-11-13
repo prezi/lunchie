@@ -1,7 +1,6 @@
 //Description:
   //Cancels lunch requests
 
-cancelLunch = require('./../lib/cancellunch').cancelLunch;
 User = require('../model').User;
 
 var usrMsgs = require('../MessagesEN');
@@ -11,7 +10,9 @@ module.exports = function(robot) {
 	  var _jid = msg.message.user.jid;
 	  User.find({where: {jid: _jid}}).success(function(usr){
 	  	if (usr && usr.rounded_time != null && usr.request_time != null) {
-	  		usr.updateAttributes({rounded_time: null, request_time: null});
+	  		usr.destroy().success(function() {
+        		console.log("User removed successfully!");
+      		})
 	  		msg.reply(usrMsgs.confirmUserCancelChoice.format(msg.message.user.name));	
 	  	} else {
 	  		msg.reply(usrMsgs.invalidTimeForCancel.format(msg.message.user.name));	
