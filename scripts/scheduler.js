@@ -8,33 +8,52 @@
 // Dependencies:
 //   cron, notify_lunch_partners
 
-generateGroups = require('./../lib/answer').generateGroups;
 retrieveGroups = require('./../lib/answer').retrieveGroups;
 
 var MAXSIZE = 4;
 
 module.exports = function(robot) {
+ 
   var cron = require('cron');
-  var cronJob = cron.job("0 */1 * * * *", function() {
-  //  var cronJob = cron.job("0 0,15,30,45 * * * *", function() {
+ 
+  // script runs only on every quarter between 12 pm to 15 pm
+  
+  var cronJob = cron.job("0 0,15,30,45 12-15 * * *", function() {
+    
     var lunch_date = new Date();
+    
     console.log("date: " + lunch_date);
 
     lunch_date.setMinutes(lunch_date.getMinutes() + 15);
+
     if ((lunch_date.getMinutes()) < 10 ) {
       var lunch_time = lunch_date.getHours() + ":0" + lunch_date.getMinutes();
     } else {
       var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
     }
+
     console.log("lunch time is " + lunch_time);
-    // notify_lunch_partners(robot, lunch_time);
-    notifyLunchPartners(robot, "13:52");
-  }); 
+
+    notifyLunchPartners(robot, lunch_time);
+  
+  });
+
   cronJob.start();
 }
 
 function notifyLunchPartners(robot, lunch_time) {
-  var groups = retrieveGroups(lunch_time, MAXSIZE);
+
+  retrieveGroups(lunch_time, MAXSIZE , function(lunch_groups){
+
+    // just for test 
+
+     for(gi in lunch_groups){
+       console.log(" Group Number " +  gi   + " size = " +  lunch_groups[gi].length);
+     }
+
+    /* start notify people here */
+
+  });
   
   // robot.messageRoom("12694_1283811@chat.hipchat.com", "Hello");
   // for(var gi in groups) {
