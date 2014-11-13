@@ -11,7 +11,7 @@ module.exports = function(robot) {
 	  var _jid = msg.message.user.jid;
 	  User.find({where: {jid: _jid}}).success(function(usr){
 	  	if (usr && usr.rounded_time != null && usr.request_time != null) {
-	  		cancelLunch(_jid);
+	  		usr.updateAttributes({rounded_time: null, request_time: null});
 	  		msg.reply(usrMsgs.confirmUserCancelChoice.format(msg.message.user.name));	
 	  	} else {
 	  		msg.reply(usrMsgs.invalidTimeForCancel.format(msg.message.user.name));	
