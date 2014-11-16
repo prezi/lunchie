@@ -20,10 +20,10 @@ function isCorrectTimeForLunch(hours , minutes){
 		return false;
 	}
 	// convert time to minutes and compare them 
-	var minTimeForLaunch = 12 * 60 + 30 ;
-	var maxTimeForLanuch = 14 * 60 + 59 ;
-	var requestedTimeForLanuch = Number(hours) * 60 + Number(minutes);
-	if(requestedTimeForLanuch >= minTimeForLaunch && requestedTimeForLanuch <= maxTimeForLanuch) {
+	var minTimeforLunch = 12 * 60 + 30 ;
+	var maxTimeforLunch = 14 * 60 + 59 ;
+	var requestedTimeForLunch = Number(hours) * 60 + Number(minutes);
+	if(requestedTimeForLunch >= minTimeforLunch && requestedTimeForLunch <= maxTimeforLunch) {
 		return true;
 	}
 	return false;
