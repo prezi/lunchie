@@ -55,9 +55,9 @@ function notifyLunchPartners(robot, lunch_time) {
     for (var gi in lunch_groups) {
       var group = lunch_groups[gi];
       if (group.length == 1) {
-        var response_text = "Hey " + '@'+group[0].mention_name + ", unfortunately, nobody signed up for lunch at " + 
-        lunch_time + ". Enjoy your meal!";
-        robot.messageRoom(group[0].jid, response_text);
+        // var response_text = "Hey " + '@'+group[0].mention_name + ", unfortunately, nobody signed up for lunch at " + 
+        // lunch_time + ". Enjoy your meal!";
+        robot.messageRoom(group[0].jid, usrMsgs.noMatchesResponse.format(group[0].mention_name, lunch_time));
 
       } else {
         var response_text = "Enjoy your meal at " + lunch_time + ". Your lunch partners are:\n" + 
