@@ -65,7 +65,7 @@ function notifyLunchPartners(robot, lunch_time) {
 
         for(var ui in group) {
           var user = group[ui];
-          robot.messageRoom(user.jid, "Hey " + getMentionName(user) + ", "+ response_text.replace(getMentionName(user)) + '\n', "");
+          robot.messageRoom(user.jid, "Hey " + getMentionName(user) + ", "+ response_text.replace(getMentionName(user) + '\n', ""));
         }
       }
     }
