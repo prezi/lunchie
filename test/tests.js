@@ -62,13 +62,15 @@ describe("Lunchie", function() {
 
     it("adds user to database on normal input", function(done) {
         adapter.on("reply", function(envelope, strings) {
-            User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
-                assert.isNotNull(usr, "Adding user to db was not successfull");        
-                done();
-            });
+            setTimeout(function(){
+                User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                    assert.isNotNull(usr, "Adding user to db was not successfull");        
+                    done();
+                });
+            }, 500);
         });
 
-        adapter.receive(new TextMessage(user, "@lunchie 12:49"));
+        adapter.receive(new TextMessage(user, "@lunchie 14:49"));
 
     });
 
@@ -78,16 +80,16 @@ describe("Lunchie", function() {
             setTimeout(function(){
                 User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 console.log(usr);
-                assert.equal(usr.rounded_time,'13:00', "Nope, it doesn't round time correctly");        
+                assert.equal(usr.rounded_time,'15:00', "Nope, it doesn't round time correctly");        
                 done();
             })}, 500);
         });
 
-        adapter.receive(new TextMessage(user, "@lunchie 12:55"));
+        adapter.receive(new TextMessage(user, "@lunchie 14:55"));
 
     });
 
-    it("knows that time interval should be between 12:30 and 14:59", function(done) {
+    it("knows that time interval should be between 12:30(or current time if it is bigger) and 14:59", function(done) {
         var mocha_user;
         var numOfCases = 3;
         var curCase = 0;
