@@ -31,7 +31,7 @@ module.exports = function(robot) {
 		} else if (checkCorrectTimeForLunch == 0) {
 			msg.reply(usrMsgs.tooLateTimeForLunch.format(msg.message.user.name));
 		} else {
-			msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name));
+			msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
 		}
 	});
 };
