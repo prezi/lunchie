@@ -72,6 +72,11 @@ In Heroku , If you want to see the actual records in the database you need to us
 You may want to get comfortable with `heroku logs` and `heroku restart`
 if you're having issues.
 
+
+For database modules , Sequelize used [ http://sequelizejs.com/articles/getting-started ]
+
+You will need also to setup Postgress on your local Machine [ https://wiki.postgresql.org/wiki/Detailed_installation_guides ]
+
 ## In case, you want to improve or change it...
 
 You can add your own scripts to hubot, check out the [Scripting Guide](https://github.com/github/hubot/blob/master/docs/scripting.md) and [hubot-scripts](https://github.com/github/hubot-scripts).
