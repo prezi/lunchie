@@ -16,6 +16,10 @@ installed on your computer.
 
 ### Running Lunchie locally
 
+Set deployment_mode variable in the AppConfig file to [deployment_local] 
+
+Change the local Database Paramters to match your paramters (dbName , dbUserName , dbPassword)
+
 You can test your hubot locally by typing `% bin/hubot` in your terminal.
 
 However, if you want to run it on HipChat, you will need a HipChat account for that. After creating your account, check your profile settings. At the *XMPP/Jabber info* part you can see the *Jabber ID* which is *JID* now and you'll also need your password for making it work.
@@ -45,6 +49,8 @@ Check HipChat now. Lunchie should be there :)
     % git push heroku master
     % heroku ps:scale app=1
 
+Also you need to set deployment_mode variable in the AppConfig file to [deployment_server].
+
 If you run into any problems, checkout Heroku's [docs](https://devcenter.heroku.com/articles/getting-started-with-nodejs-o).
 
 You'll need to edit the `Procfile` to set the name of your hubot.
@@ -58,6 +64,8 @@ In Heroku, you have to set the Config Variables: you just need to add the same i
 - HUBOT_HIPCHAT_PASSWORD your_password
 
 After assigning at least 1 dyno to this task, your Lunchie should be up and running in HipChat, always!
+
+In Heroku , If you want to see the actual records in the database you need to use this addone [ https://addons.heroku.com/pgbackups ] 
 
 ## Restart the bot
 

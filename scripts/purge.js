@@ -7,7 +7,7 @@ module.exports = function(robot) {
     
   sequelize
     .query("TRUNCATE table users;").success(function(myTableRows) {
-    console.log(myTableRows)
+    console.log("Truncating .. Now the table is empty : "+ myTableRows);
 })
 
   });
