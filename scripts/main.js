@@ -10,12 +10,10 @@
 // Commands:
 //   hubot 13:00
 
-
 collect = require('./../lib/collect').collect;
 utilities = require('./../lib/utilities');
 
 var usrMsgs = require('../MessagesEN');
-
 
 module.exports = function(robot) {
 	robot.respond(/\b([0-9]{2})\:([0-9]{2})\b/i, function(msg) {
@@ -35,4 +33,3 @@ module.exports = function(robot) {
 		}
 	});
 };
-

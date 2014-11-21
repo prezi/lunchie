@@ -1,4 +1,4 @@
-		/*
+/*
  Messages Resource Bundle
  Author : Khaled Sami 
  notes : Contains all the messages that appear to the users
@@ -13,8 +13,6 @@ var confirmUserCancelChoice = 'Okay, {0} ! I will cancel your lunch request.';
 var invalidTimeForCancel = 'Hey, {0} ! You tried to trick me. Before canceling lunch request try to request it ;) ';
 var noMatchesResponse = "Hey, @{0}! Unfortunately, nobody signed up for lunch at {1} Enjoy your meal!";
 
-
-
 exports.welcomeMsg = welcomeMsg;
 exports.confirmUserSignUpChoice = confirmUserSignUpChoice;
 exports.invalidTimeForLunch = invalidTimeForLunch;
@@ -22,4 +20,3 @@ exports.confirmUserCancelChoice = confirmUserCancelChoice;
 exports.invalidTimeForCancel = invalidTimeForCancel;
 exports.tooLateTimeForLunch = tooLateTimeForLunch;
 exports.noMatchesResponse = noMatchesResponse;
-

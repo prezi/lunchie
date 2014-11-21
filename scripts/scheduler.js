@@ -21,8 +21,6 @@ module.exports = function(robot) {
   var cronJob = cron.job("0 0,15,30,45 12-15 * * *", function() {
     
     var lunch_date = new Date();
-    
-    console.log("date: " + lunch_date);
 
     lunch_date.setMinutes(lunch_date.getMinutes() + 15);
 
@@ -31,8 +29,6 @@ module.exports = function(robot) {
     } else {
       var lunch_time = lunch_date.getHours() + ":" + lunch_date.getMinutes();
     }
-
-    console.log("lunch time is " + lunch_time);
 
     notifyLunchPartners(robot, lunch_time);
 
@@ -45,18 +41,10 @@ function notifyLunchPartners(robot, lunch_time) {
 
   retrieveGroups(lunch_time, MAXSIZE , function(lunch_groups){
 
-    // just for test 
-     console.log(lunch_groups);
-     for(var gi in lunch_groups){
-       console.log(" Group Number " +  gi   + " size = " +  lunch_groups[gi].length);
-     }
-
     /* start notify people here */
     for (var gi in lunch_groups) {
       var group = lunch_groups[gi];
       if (group.length == 1) {
-        // var response_text = "Hey " + '@'+group[0].mention_name + ", unfortunately, nobody signed up for lunch at " + 
-        // lunch_time + ". Enjoy your meal!";
         robot.messageRoom(group[0].jid, usrMsgs.noMatchesResponse.format(group[0].mention_name, lunch_time));
 
       } else {

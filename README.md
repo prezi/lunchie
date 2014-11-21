@@ -72,10 +72,10 @@ In Heroku , If you want to see the actual records in the database you need to us
 You may want to get comfortable with `heroku logs` and `heroku restart`
 if you're having issues.
 
+### Database
 
-For database modules , Sequelize used [ http://sequelizejs.com/articles/getting-started ]
-
-You will need also to setup Postgress on your local Machine [ https://wiki.postgresql.org/wiki/Detailed_installation_guides ]
+For database modules, you can use Sequelize [ http://sequelizejs.com/articles/getting-started ].
+You will also need to setup Postgress on your local Machine [ https://wiki.postgresql.org/wiki/Detailed_installation_guides ].
 
 ## In case, you want to improve or change it...
 

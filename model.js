@@ -33,7 +33,6 @@ sequelize
     }
   })
 
-
 var User = sequelize.define('User', {
   mention_name: Sequelize.STRING,
   jid: Sequelize.STRING,
