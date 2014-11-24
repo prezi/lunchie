@@ -12,3 +12,6 @@ exports.cancelRegex = /\bcancel\b/i;
 
 exports.minTimeforLunch = 12 * 60 + 30 ; 
 exports.maxTimeforLunch = 14 * 60 + 59 ; 
+
+
+exports.groupMaxSize = 4;
