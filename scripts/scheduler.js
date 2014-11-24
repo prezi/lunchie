@@ -21,7 +21,7 @@ module.exports = function(robot) {
     var cronJob = cron.job("0 0,15,30,45 12-15 * * *", function() {
 
         var lunch_date = new Date();
-        
+
         lunch_date.setMinutes(lunch_date.getMinutes() + 15);
 
         if ((lunch_date.getMinutes()) < 10) {

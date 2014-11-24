@@ -5,7 +5,7 @@
 */
 var utilities = require('./lib/utilities');
 
-exports.welcomeMsg = 'Hi {0}! Welcome to lunch-roulette. I hope you meet some new Prezilians today! Please input a preferred lunch time between 12:30 and 14:59. I will notify you of your random partners 15 minutes prior to lunch! \n You may also cancel or update your request anytime. Enjoy!';
+exports.instructionMsg = 'Hello {0} !\nThis is how to use me!\n\nSign up: Input a preferred lunch time between 12:30 and 14:59 in hh:mm format at least 16 minutes before the actual time.\n\nUpdate: Simply input a new preferred lunch time between 12:30 and 14:59 in hh:mm format\n\nCancel: Send cancel\n\nEnjoy!';
 exports.confirmUserSignUpChoice = 'Okay, {0}! I will sign you up for {1}.';
 exports.invalidTimeForLunch = '{0}, your time interval is not correct. Please input a preferred lunch time between {1} and 14:59.';
 exports.confirmUserCancelChoice = 'Okay, {0}! I will cancel your lunch request.';

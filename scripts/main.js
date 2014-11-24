@@ -17,8 +17,8 @@ module.exports = function(robot) {
 function matchCommand(msg, inputCommand) {
     if (inputCommand.split(/\s+/).length > 1)
         return 0;
-    if (inputCommand.match(globals.helloRegex) !== null) {
-        helloMessage(msg);
+    if ((inputCommand.match(globals.helloRegex) !== null) || (inputCommand.match(globals.helpRegex) !== null)) {
+        showInstructionMessage(msg);
     } else if (inputCommand.match(globals.cancelRegex) !== null) {
         cancel(msg);
     } else if (inputCommand.match(globals.timeRegex) !== null) {
@@ -30,8 +30,8 @@ function matchCommand(msg, inputCommand) {
 }
 
 
-function helloMessage(msg) {
-    msg.reply(usrMsgs.welcomeMsg.format(msg.message.user.name));
+function showInstructionMessage(msg) {
+    msg.reply(usrMsgs.instructionMsg.format(msg.message.user.name));
 }
 
 
