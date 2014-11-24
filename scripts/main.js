@@ -8,7 +8,7 @@ module.exports = function(robot) {
     robot.respond(/(.*)/i, function(msg) {
         var inputCommand = msg.match[1];
         if (matchCommand(msg, inputCommand) === 0) {
-            console.log(usrMsgs.wrongCommand);
+            msg.reply(usrMsgs.wrongCommand);
         }
     });
 };
