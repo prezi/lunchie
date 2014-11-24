@@ -1,35 +1,71 @@
-// Description:
-//   lunch roulette for grouping employees
-//
-// Dependencies:
-//   None
-//
-// Configuration:
-//   None
-//
-// Commands:
-//   hubot 13:00
-
-collect = require('./../lib/collect').collect;
-utilities = require('./../lib/utilities');
-
+var collect = require('./../lib/collect').collect;
+var utilities = require('./../lib/utilities');
+var User = require('../model').User;
 var usrMsgs = require('../MessagesEN');
+var globals = require('../globals');
 
 module.exports = function(robot) {
-	robot.respond(/\b([0-9]{2})\:([0-9]{2})\b/i, function(msg) {
-
-		var checkCorrectTimeForLunch = utilities.checkLunchTime(msg.match[1]+":"+msg.match[2]);
-
-		if(checkCorrectTimeForLunch === 1){
-			var mention_name = msg.message.user.mention_name;
-			var time = msg.match[1] + ":" + msg.match[2];
-			var jid = msg.message.user.jid;
-			collect(mention_name, time, jid);
-			msg.reply(usrMsgs.confirmUserSignUpChoice.format(msg.message.user.name,time));
-		} else if (checkCorrectTimeForLunch == 0) {
-			msg.reply(usrMsgs.tooLateTimeForLunch.format(msg.message.user.name));
-		} else {
-			msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
-		}
-	});
+    robot.respond(/(.*)/i, function(msg) {
+        var inputCommand = msg.match[1];
+        if (matchCommand(msg, inputCommand) === 0) {
+            console.log(usrMsgs.wrongCommand);
+        }
+    });
 };
+
+
+function matchCommand(msg, inputCommand) {
+    if (inputCommand.split(/\s+/).length > 1)
+        return 0;
+    if (inputCommand.match(globals.helloRegex) !== null) {
+        helloMessage(msg);
+    } else if (inputCommand.match(globals.cancelRegex) !== null) {
+        cancel(msg);
+    } else if (inputCommand.match(globals.timeRegex) !== null) {
+        lunchRequest(inputCommand, msg);
+    } else {
+        return 0;
+    }
+    return 1;
+}
+
+
+function helloMessage(msg) {
+    msg.reply(usrMsgs.welcomeMsg.format(msg.message.user.name));
+}
+
+
+function cancel(msg) {
+    var _jid = msg.message.user.jid;
+    User.find({
+        where: {
+            jid: _jid
+        }
+    }).success(function(usr) {
+        if (usr && usr.rounded_time != null && usr.request_time != null) {
+            usr.destroy().success(function() {
+                console.log("User removed successfully!");
+            })
+            msg.reply(usrMsgs.confirmUserCancelChoice.format(msg.message.user.name));
+        } else {
+            msg.reply(usrMsgs.invalidTimeForCancel.format(msg.message.user.name));
+        }
+    });
+}
+
+function lunchRequest(inputCommand, msg) {
+    var hours = inputCommand.split(':')[0];
+    var minutes = inputCommand.split(':')[1];
+    var checkCorrectTimeForLunch = utilities.checkLunchTime(hours + ":" + minutes);
+    if (checkCorrectTimeForLunch === 1) {
+        var mention_name = msg.message.user.mention_name;
+        var time = hours + ":" + minutes;
+        var jid = msg.message.user.jid;
+        collect(mention_name, time, jid);
+        msg.reply(usrMsgs.confirmUserSignUpChoice.format(msg.message.user.name, time));
+    } else if (checkCorrectTimeForLunch === 0) {
+        msg.reply(usrMsgs.tooLateTimeForLunch.format(msg.message.user.name));
+    } else {
+        msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
+    }
+}
