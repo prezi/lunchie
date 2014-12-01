@@ -43,8 +43,8 @@ function cancel(msg) {
         }
     }).success(function(usr) {
         if (usr && usr.rounded_time != null && usr.request_time != null) {
-            usr.destroy().success(function() {
-                console.log("User removed successfully!");
+            usr.updateAttributes({request_time: null, rounded_time: null}).success(function() {
+                console.log("User canceled lunch successfully!");
             })
             msg.reply(usrMsgs.confirmUserCancelChoice.format(msg.message.user.name));
         } else {
