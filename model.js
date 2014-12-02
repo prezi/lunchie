@@ -43,6 +43,15 @@ var User = sequelize.define('User', {
     updatedAt: 'last_update'
 })
 
+var Statistics = sequelize.define('Statistics', {
+    date: Sequelize.DATE,
+    data: Sequelize.TEXT,
+    number_of_users: Sequelize.INTEGER,
+}, {
+    tableName: 'statistics',
+    timestamps: false,
+})
+
 sequelize
     .sync({
         force: false
@@ -58,3 +67,4 @@ sequelize
 // export connection
 module.exports.sequelize = sequelize;
 module.exports.User = User;
+module.exports.Statistics = Statistics;
