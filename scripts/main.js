@@ -15,8 +15,10 @@ module.exports = function(robot) {
 
 
 function matchCommand(msg, inputCommand) {
-    if (inputCommand.split(/\s+/).length > 1)
+    inputCommand = inputCommand.trim();
+    if (inputCommand.split(/\s+/).length > 1){
         return 0;
+    }
     if ((inputCommand.match(globals.helloRegex) !== null) || (inputCommand.match(globals.helpRegex) !== null)) {
         showInstructionMessage(msg);
     } else if (inputCommand.match(globals.cancelRegex) !== null) {
