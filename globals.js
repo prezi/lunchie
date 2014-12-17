@@ -8,6 +8,7 @@ exports.timeRegex = /\b([0-9]{2})\:([0-9]{2})\b/i;
 exports.helloRegex = /\b(h+e+l+l+o+)|(h+i+)|(info)|(h+e+y+)\b/i;
 exports.cancelRegex = /\bcancel\b/i;
 exports.helpRegex = /\bhelp\b/i;
+exports.thanksRegex = /\b(thanks)|(thank you)|(thanks!)|(cool)|(köszi)|(köszönöm)|(danke)\b/i;
 
 
 

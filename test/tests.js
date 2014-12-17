@@ -175,5 +175,13 @@ describe("Lunchie", function() {
         adapter.receive(new TextMessage(user, "@lunchie cancel"));
 
     });
+    it("responds when thanked", function(done) {
+        adapter.on("reply", function(envelope, strings) {
+            assert.match(strings[0], (/You are welcome ;)/));
+            done();
+        });
+
+        adapter.receive(new TextMessage(user, "@lunchie thanks"));
+    });
 
 });
