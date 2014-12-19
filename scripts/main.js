@@ -25,6 +25,8 @@ function matchCommand(msg, inputCommand) {
         cancel(msg);
     } else if (inputCommand.match(globals.timeRegex) !== null) {
         lunchRequest(inputCommand, msg);
+    } else if (inputCommand.match(globals.thanksRegex) !== null) {
+        showThanksMessage(inputCommand, msg);
     } else {
         return 0;
     }
@@ -35,7 +37,6 @@ function matchCommand(msg, inputCommand) {
 function showInstructionMessage(msg) {
     msg.reply(usrMsgs.instructionMsg.format(msg.message.user.name));
 }
-
 
 function cancel(msg) {
     var _jid = msg.message.user.jid;
@@ -70,4 +71,7 @@ function lunchRequest(inputCommand, msg) {
     } else {
         msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
     }
+}
+function showThanksMessage(msg) {
+    msg.reply(usrMsgs.thanksMsg.format(msg.message.user.name));
 }

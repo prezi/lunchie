@@ -13,3 +13,4 @@ exports.invalidTimeForCancel = 'Hey, {0}! You tried to trick me. Before cancelin
 exports.tooLateTimeForLunch = '{0}, Oops it is too late to sign up for this lunch time today, please try another time.';
 exports.noMatchesResponse = "Hey, @{0}! Unfortunately, nobody signed up for lunch at {1}. Enjoy your meal!";
 exports.wrongCommand = "Sorry I don't know this command. Please type Help to see my commands ;) ";
+exports.thanksMsg = 'You are welcome ;) ';
