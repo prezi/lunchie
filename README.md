@@ -65,7 +65,7 @@ In Heroku, you have to set the Config Variables: you just need to add the same i
 
 After assigning at least 1 dyno to this task, your Lunchie should be up and running in HipChat, always!
 
-In Heroku , If you want to see the actual records in the database you need to use this addone [ https://addons.heroku.com/pgbackups ]
+If you want to see the actual records in the database you need to use this [Heroku addon](https://addons.heroku.com/pgbackups).
 
 ## Restart the bot
 
