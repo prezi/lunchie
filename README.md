@@ -16,7 +16,7 @@ installed on your computer.
 
 ### Running Lunchie locally
 
-Set deployment_mode variable in the AppConfig file to [deployment_local] 
+Set deployment_mode variable in the AppConfig file to [deployment_local]
 
 Change the local Database Paramters to match your paramters (dbName , dbUserName , dbPassword)
 
@@ -65,7 +65,7 @@ In Heroku, you have to set the Config Variables: you just need to add the same i
 
 After assigning at least 1 dyno to this task, your Lunchie should be up and running in HipChat, always!
 
-In Heroku , If you want to see the actual records in the database you need to use this addone [ https://addons.heroku.com/pgbackups ] 
+In Heroku , If you want to see the actual records in the database you need to use this addone [ https://addons.heroku.com/pgbackups ]
 
 ## Restart the bot
 
@@ -74,8 +74,8 @@ if you're having issues.
 
 ### Database
 
-For database modules, you can use Sequelize [ http://sequelizejs.com/articles/getting-started ].
-You will also need to setup Postgress on your local Machine [ https://wiki.postgresql.org/wiki/Detailed_installation_guides ].
+For database modules, you can use [Sequelize](http://sequelizejs.com/articles/getting-started).
+You will also need to setup [Postgress on your local Machine](https://wiki.postgresql.org/wiki/Detailed_installation_guides).
 
 ## In case, you want to improve or change it...
 
