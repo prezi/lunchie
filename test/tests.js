@@ -57,7 +57,7 @@ describe("Lunchie", function() {
                     assert.isNotNull(usr, "Adding user to db was not successfull");
                     done();
                 });
-            }, 1000);
+            }, 2000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 14:49"));
@@ -87,12 +87,14 @@ describe("Lunchie", function() {
             if(usr) mocha_user = usr;
         });
         adapter.on("reply", function(envelope, strings) {
-            ++curCase;
-            User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
-                assert.deepEqual(mocha_user, usr);
-            });
-            assert.match(strings[0], (/, Your time interval is not correct. Please input a preferred lunch time between 12:30 and 14:59./));
-            if (curCase == numOfCases) done();
+            setTimeout(function(){
+                ++curCase;
+                User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
+                    assert.deepEqual(mocha_user, usr);
+                });
+                assert.match(strings[0], (/, Your time interval is not correct. Please input a preferred lunch time between 12:30 and 14:59./));
+                if (curCase == numOfCases) done();
+            }, 2000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 15:59"));
@@ -167,8 +169,10 @@ describe("Lunchie", function() {
     });
     it("responds when thanked", function(done) {
         adapter.on("reply", function(envelope, strings) {
-            assert.match(strings[0], (/You are welcome ;)/));
-            done();
+            setTimeout(function(){
+                assert.match(strings[0], (/You are welcome ;)/));
+                done();
+            }, 2000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie thanks"));
