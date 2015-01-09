@@ -92,7 +92,7 @@ describe("Lunchie", function() {
                 User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                     assert.deepEqual(mocha_user, usr);
                 });
-                assert.match(strings[0], (mocha, your time interval is not correct. Please input a preferred lunch time between 12:30 and 14:59.));
+                assert.match(strings[0], ("mocha, your time interval is not correct. Please input a preferred lunch time between 12:30 and 14:59.""));
                 if (curCase == numOfCases) done();
             }, 2000);
         });
