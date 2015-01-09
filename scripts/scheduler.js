@@ -56,7 +56,7 @@ function notifyLunchPartners(robot, lunch_time) {
                 }
                 else { 
                     response_text ++ "s are:\n");
-                    }
+                }
 
                 response_text += group.map(getMentionName).join('\n') + "\n";
 
