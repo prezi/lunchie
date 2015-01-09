@@ -47,9 +47,18 @@ function notifyLunchPartners(robot, lunch_time) {
             if (group.length == 1) {
                 robot.messageRoom(group[0].jid, usrMsgs.noMatchesResponse.format(group[0].mention_name, lunch_time));
 
-            } else {
-                var response_text = "Enjoy your meal at " + lunch_time + ". Your lunch partners are:\n" +
-                    group.map(getMentionName).join('\n') + "\n";
+            } 
+
+            else {
+                var response_text = "Enjoy your meal at " + lunch_time + ". Your lunch partner";
+                if (group.length == 2) {
+                    response_text += " is:\n";
+                }
+                else { 
+                    response_text ++ "s are:\n");
+                }
+
+                response_text += group.map(getMentionName).join('\n') + "\n";
 
                 for (var ui in group) {
                     var user = group[ui];
