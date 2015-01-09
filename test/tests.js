@@ -57,7 +57,7 @@ describe("Lunchie", function() {
                     assert.isNotNull(usr, "Adding user to db was not successfull");
                     done();
                 });
-            }, 100);
+            }, 1000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 14:49"));
@@ -72,7 +72,7 @@ describe("Lunchie", function() {
                 console.log(usr);
                 assert.equal(usr.rounded_time,'15:00', "Nope, it doesn't round time correctly");
                 done();
-            })}, 100);
+            })}, 1000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 14:55"));
@@ -105,19 +105,19 @@ describe("Lunchie", function() {
     it("handles multiple messages from the same user", function(done) {
         var numOfCases = 4;
         var curCase = 0;
-        this.timeout(100);
+        this.timeout(10000);
         adapter.on("reply", function(envelope, strings) {
             if (++curCase == numOfCases)
                 setTimeout(function(){User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                     assert.equal(usr.request_time,'13:35', "Nope, it doesn't handle multiple messages correctly");
                     done();
-                })}, 100);
+                })}, 1000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 12:39"));
         adapter.receive(new TextMessage(user, "@lunchie 14:39"));
         adapter.receive(new TextMessage(user, "@lunchie 12:35"));
-        setTimeout(function(){adapter.receive(new TextMessage(user, "@lunchie 13:35"))}, 100);
+        setTimeout(function(){adapter.receive(new TextMessage(user, "@lunchie 13:35"))}, 1000);
         //timeout is guaranty that this message will be processed last by db
     });
 
@@ -130,7 +130,7 @@ describe("Lunchie", function() {
                 setTimeout(function(){User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(result) {
                     assert.equal(result.count, 1, "Nope, It doubles user info in database");
                     done();
-                })}, 100);
+                })}, 1000);
         });
 
         adapter.receive(new TextMessage(user, "@lunchie 12:35"));
@@ -146,7 +146,7 @@ describe("Lunchie", function() {
                 assert.isUndefined(usr.request_time);
                 assert.isUndefined(usr.rounded_time);
                 assert.match(strings[0], (/I will cancel your lunch request./));
-                setTimeout(done, 100);
+                setTimeout(done, 1000);
             });
         });
 
