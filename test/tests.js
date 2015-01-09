@@ -26,10 +26,8 @@ describe("Lunchie", function() {
 
             // load the module under test and configure it for the
             // robot.  This is in place of external-scripts
-            require("../scripts/hello.js")(robot);
             require("../scripts/main.js")(robot);
             require("../scripts/scheduler.js")(robot);
-            require("../scripts/cancel.js")(robot);
 
             // create a user
             user = robot.brain.userForId("1", {
@@ -51,20 +49,11 @@ describe("Lunchie", function() {
         robot.shutdown();
     });
 
-    it("responds when greeted", function(done) {
-        adapter.on("reply", function(envelope, strings) {
-            assert.match(strings[0], (/Welcome to lunch-roulette. I hope you meet some new Prezilians today! Please input a preferred lunch time between 12:30 and 14:59. I will notify you of your random partners 15 minutes prior to lunch! \n You may also cancel or update your request anytime. Enjoy!/));
-            done();
-        });
-
-        adapter.receive(new TextMessage(user, "@lunchie hello"));
-    });
-
     it("adds user to database on normal input", function(done) {
         adapter.on("reply", function(envelope, strings) {
             setTimeout(function(){
                 User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
-                    assert.isNotNull(usr, "Adding user to db was not successfull");        
+                    assert.isNotNull(usr, "Adding user to db was not successfull");
                     done();
                 });
             }, 500);
@@ -80,7 +69,7 @@ describe("Lunchie", function() {
             setTimeout(function(){
                 User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 console.log(usr);
-                assert.equal(usr.rounded_time,'15:00', "Nope, it doesn't round time correctly");        
+                assert.equal(usr.rounded_time,'15:00', "Nope, it doesn't round time correctly");
                 done();
             })}, 500);
         });
@@ -94,7 +83,7 @@ describe("Lunchie", function() {
         var numOfCases = 3;
         var curCase = 0;
         User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
-            if(usr) mocha_user = usr;        
+            if(usr) mocha_user = usr;
         });
         adapter.on("reply", function(envelope, strings) {
             ++curCase;
@@ -119,8 +108,8 @@ describe("Lunchie", function() {
         adapter.on("reply", function(envelope, strings) {
             if (++curCase == numOfCases)
                 setTimeout(function(){User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
-                    assert.equal(usr.request_time,'13:35', "Nope, it doesn't handle multiple messages correctly"); 
-                    done();        
+                    assert.equal(usr.request_time,'13:35', "Nope, it doesn't handle multiple messages correctly");
+                    done();
                 })}, 500);
         });
 
@@ -139,7 +128,7 @@ describe("Lunchie", function() {
             if (++curCase == numOfCases)
                 setTimeout(function(){User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(result) {
                     assert.equal(result.count, 1, "Nope, It doubles user info in database");
-                    done(); 
+                    done();
                 })}, 500);
         });
 
@@ -156,7 +145,7 @@ describe("Lunchie", function() {
                 assert.isUndefined(usr.request_time);
                 assert.isUndefined(usr.rounded_time);
                 assert.match(strings[0], (/I will cancel your lunch request./));
-                setTimeout(done, 500); 
+                setTimeout(done, 500);
             });
         });
 
@@ -168,7 +157,7 @@ describe("Lunchie", function() {
         adapter.on("reply", function(envelope, strings) {
             User.findAndCountAll({ where: { mention_name : "mocha_user"} }).success(function(usr) {
                 assert.match(strings[0], (/You tried to trick me. Before canceling lunch request try to request it/));
-                done(); 
+                done();
             });
         });
 
