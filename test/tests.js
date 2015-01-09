@@ -26,6 +26,7 @@ describe("Lunchie", function() {
 
             // load the module under test and configure it for the
             // robot.  This is in place of external-scripts
+
             require("../scripts/main.js")(robot);
             require("../scripts/scheduler.js")(robot);
 
@@ -104,7 +105,7 @@ describe("Lunchie", function() {
     it("handles multiple messages from the same user", function(done) {
         var numOfCases = 4;
         var curCase = 0;
-        this.timeout(10000);
+        this.timeout(1000);
         adapter.on("reply", function(envelope, strings) {
             if (++curCase == numOfCases)
                 setTimeout(function(){User.find({ where: { mention_name : "mocha_user"} }).success(function(usr) {
