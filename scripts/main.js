@@ -29,7 +29,6 @@ function matchCommand(msg, inputCommand) {
         showThanksMessage(inputCommand, msg);
     } else if (inputCommand.match(globals.rulesRegex) !== null) {
         // replying with the rules
-    }
     } else {
         return 0;
     }
