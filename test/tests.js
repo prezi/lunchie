@@ -181,7 +181,7 @@ describe("Lunchie", function() {
     it("shows the rules when asked", function(done) {
         adapter.on("reply", function(envelope, strings) {
             setTimeout(function(){
-                 expected = "1. A robot may not injure a human being or, through inaction, allow a human being to come to harm.";
+                 var expected = "1. A robot may not injure a human being or, through inaction, allow a human being to come to harm.";
                  expect(strings.toString()).to.contain(expected);
                  done();
             }, 200);
