@@ -184,7 +184,7 @@ describe("Lunchie", function() {
              expected = "1. A robot may not injure a human being or, through inaction, allow a human being to come to harm."
              expect(strings.toString()).to.contain(expected);
                 done();
-            }, 2000);
+            }, 20000);
         });
 
         adapter.receive(new TextMessage(user, "what are the three rules"));
