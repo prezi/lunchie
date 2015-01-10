@@ -27,6 +27,9 @@ function matchCommand(msg, inputCommand) {
         lunchRequest(inputCommand, msg);
     } else if (inputCommand.match(globals.thanksRegex) !== null) {
         showThanksMessage(inputCommand, msg);
+    } else if (inputCommand.match(globals.rulesRegex) !== null) {
+        // replying with the rules
+    }
     } else {
         return 0;
     }
