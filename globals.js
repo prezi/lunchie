@@ -9,6 +9,7 @@ exports.helloRegex = /\b(h+e+l+l+o+)|(h+i+)|(info)|(h+e+y+)\b/i;
 exports.cancelRegex = /\bcancel\b/i;
 exports.helpRegex = /\bhelp\b/i;
 exports.thanksRegex = /\b(thanks)|(thank you)|(thanks!)|(thx)|(thanks^^)|(thanks :\))|(cool)|(köszi)|(köszönöm)|(danke)\b/i;
+exports.rulesRegex = /(what are )?the (three |3 )?(rules|laws)/i;
 
 
 
