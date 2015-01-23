@@ -78,9 +78,11 @@ function lunchRequest(inputCommand, msg) {
         msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
     }
 }
+
 function showThanksMessage(msg) {
     msg.reply(usrMsgs.thanksMsg.format(msg.message.user.name));
 }
+
 function lunchTimeQuery(msg) {
     var response = "";
     if ((msg.match(/lunch time/g) || []).length){
@@ -90,9 +92,12 @@ function lunchTimeQuery(msg) {
         msg.toString().replace("lunch time ", "");
         var hours = msg.split(':')[0];
         var minutes = msg.split(':')[1];
-        var checkCorrectTimeForLunch = utilities.checkLunchTime(hours + ":" + minutes);
+        var time = hours + ":" + minutes;
+        var checkCorrectTimeForLunch = utilities.checkLunchTime(time);
+
         if (checkCorrectTimeForLunch === 1)) {
-            response += renderAnswerForQuery(hours + ":" + minutes);
+            time = utilities.roundTime(time);
+            response += renderAnswerForQuery(time);
         }
     }
     msg.reply(response);
