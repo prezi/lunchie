@@ -10,7 +10,7 @@ exports.cancelRegex = /\bcancel\b/i;
 exports.helpRegex = /\bhelp\b/i;
 exports.thanksRegex = /\b(thanks)|(thank you)|(thanks!)|(thx)|(thanks^^)|(thanks :\))|(cool)|(köszi)|(köszönöm)|(danke)\b/i;
 exports.rulesRegex = /(what are )?the (three |3 )?(rules|laws)/i;
-
+exports.lunchTimeQueryRegex = /lunch time ?(\b([0-9]{2})\:([0-9]{2}\ ?))*\b/i;
 
 
 exports.minTimeforLunch = 12 * 60 + 30;

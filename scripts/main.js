@@ -3,6 +3,8 @@ var utilities = require('./../lib/utilities');
 var User = require('../model').User;
 var usrMsgs = require('../MessagesEN');
 var globals = require('../globals');
+var queryForAllTimes = require('./../lib/answer').queryForAllTimes;
+var renderAnswerForQuery = require('./../lib/answer').renderAnswerForQuery;
 
 module.exports = function(robot) {
     robot.respond(/(.*)/i, function(msg) {
@@ -27,6 +29,8 @@ function matchCommand(msg, inputCommand) {
         lunchRequest(inputCommand, msg);
     } else if (inputCommand.match(globals.thanksRegex) !== null) {
         showThanksMessage(inputCommand, msg);
+    } else if (inputCommand.match(globals.lunchTimeQueryRegex) !== null) {
+        lunchTimeQuery(msg);
     } else if (inputCommand.match(globals.rulesRegex) !== null) {
         // replying with the rules
     } else {
@@ -74,6 +78,27 @@ function lunchRequest(inputCommand, msg) {
         msg.reply(usrMsgs.invalidTimeForLunch.format(msg.message.user.name, checkCorrectTimeForLunch));
     }
 }
+
 function showThanksMessage(msg) {
     msg.reply(usrMsgs.thanksMsg.format(msg.message.user.name));
+}
+
+function lunchTimeQuery(msg) {
+    var response = "";
+    if ((msg.match(/lunch time/g) || []).length){
+        response += queryForAllTimes();
+    }
+    else {
+        msg.toString().replace("lunch time ", "");
+        var hours = msg.split(':')[0];
+        var minutes = msg.split(':')[1];
+        var time = hours + ":" + minutes;
+        var checkCorrectTimeForLunch = utilities.checkLunchTime(time);
+
+        if (checkCorrectTimeForLunch === 1)) {
+            time = utilities.roundTime(time);
+            response += renderAnswerForQuery(time);
+        }
+    }
+    msg.reply(response);
 }
