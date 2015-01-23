@@ -3,7 +3,8 @@ var utilities = require('./../lib/utilities');
 var User = require('../model').User;
 var usrMsgs = require('../MessagesEN');
 var globals = require('../globals');
-var queryForTime = require('./../lib/answer').queryForTime;
+var queryForAllTimes = require('./../lib/answer').queryForAllTimes;
+var renderAnswerForQuery = require('./../lib/answer').renderAnswerForQuery;
 
 module.exports = function(robot) {
     robot.respond(/(.*)/i, function(msg) {
@@ -81,37 +82,18 @@ function showThanksMessage(msg) {
     msg.reply(usrMsgs.thanksMsg.format(msg.message.user.name));
 }
 function lunchTimeQuery(msg) {
-    // check how many argument used for the lunch time command
-    var count = (msg.match(/:/g) || []).length;
-    var respondText = "";
-    if ( count == 0) {
-        // list for all the times
-
-
-    } 
+    var response = "";
+    if ((msg.match(/lunch time/g) || []).length){
+        response += queryForAllTimes();
+    }
     else {
         msg.toString().replace("lunch time ", "");
         var hours = msg.split(':')[0];
         var minutes = msg.split(':')[1];
         var checkCorrectTimeForLunch = utilities.checkLunchTime(hours + ":" + minutes);
-        if (checkCorrectTimeForLunch === 1) {
-            var num = queryForTime(hours + ":" + minutes);
-            if (num == 0){
-                respondText += "Nobody signed up for " + hours + ":" + minutes;
-            }
-            else {
-                respondText += hours + ":" + minutes + " " + num;
-                if (num == 1) {
-                    respondText += "person";
-                } else {
-                    respondText += "people";
-                }
-
-            }
-            if (msg.split(':').length>2){
-
-            }
-        }    
+        if (checkCorrectTimeForLunch === 1)) {
+            response += renderAnswerForQuery(hours + ":" + minutes);
+        }
     }
-    msg.reply(respondText);
+    msg.reply(response);
 }
