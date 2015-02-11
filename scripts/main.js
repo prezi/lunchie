@@ -8,6 +8,7 @@ module.exports = function(robot) {
     robot.respond(/(.*)/i, function(msg) {
         var inputCommand = msg.match[1];
         if (matchCommand(msg, inputCommand) === 0) {
+            msg.reply(usrMsgs.invalidTimeForCancel.format(msg.message.user.name));
             msg.reply(usrMsgs.wrongCommand);
         }
     });
