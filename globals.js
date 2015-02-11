@@ -10,8 +10,7 @@ exports.cancelRegex = /\bcancel\b/i;
 exports.helpRegex = /\bhelp\b/i;
 exports.thanksRegex = /\b(thanks)|(thank you)|(thanks!)|(thx)|(thanks^^)|(thanks :\))|(cool)|(köszi)|(köszönöm)|(danke)\b/i;
 exports.rulesRegex = /(what are )?the (three |3 )?(rules|laws)/i;
-
-
+exports.sayRegex = /say (.+)/i;
 
 exports.minTimeforLunch = 12 * 60 + 30;
 exports.maxTimeforLunch = 14 * 60 + 59;

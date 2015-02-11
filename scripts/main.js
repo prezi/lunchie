@@ -29,6 +29,8 @@ function matchCommand(msg, inputCommand) {
         showThanksMessage(inputCommand, msg);
     } else if (inputCommand.match(globals.rulesRegex) !== null) {
         // replying with the rules
+    } else if (inputCommand.match(globals.sayRegex) !== null) {
+        echoTheInput(inputCommand);
     } else {
         return 0;
     }
@@ -76,4 +78,7 @@ function lunchRequest(inputCommand, msg) {
 }
 function showThanksMessage(msg) {
     msg.reply(usrMsgs.thanksMsg.format(msg.message.user.name));
+}
+function echoTheInput(inputCommand) {
+    msg.send(inputCommand);
 }
