@@ -10,7 +10,7 @@ We created a `package.json`, so if you `npm install` it, you'll already have:
 
 - [Hubot](https://hubot.github.com/) and the hubot-scripts
 - [Hubot-Hipchat](https://github.com/hipchat/hubot-hipchat), for connecting hubot to the HipChat system
-- [Mocha](http://visionmedia.github.io/mocha/), for testing (we also have some test-files for you)
+- [Mocha](http://mochajs.org/), for testing (we also have some test-files for you)
 
 installed on your computer.
 
